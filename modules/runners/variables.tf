@@ -238,3 +238,9 @@ variable "create_service_linked_role_spot" {
   type        = bool
   default     = false
 }
+
+variable "github_server_url" {
+  description = "(Optional) provide an alternative GitHub server url for GitHub on premise."
+  type        = string
+  default     = "https://github.com/"
+}

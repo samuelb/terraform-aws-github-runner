@@ -56,6 +56,7 @@ export const scaleUp = async (eventSource: string, payload: ActionRequestMessage
   const environment = process.env.ENVIRONMENT as string;
   const githubAppAuth = await createGithubAppAuth(payload.installationId);
   const githubInstallationClient = await createInstallationClient(githubAppAuth);
+  const githubServerUrl = process.env.GITHUB_SERVER_URL as string;
   const queuedWorkflows = await githubInstallationClient.actions.listWorkflowRunsForRepo({
     owner: payload.repositoryOwner,
     repo: payload.repositoryName,
@@ -93,8 +94,8 @@ export const scaleUp = async (eventSource: string, payload: ActionRequestMessage
       await createRunner({
         environment: environment,
         runnerConfig: enableOrgLevel
-          ? `--url https://github.com/${payload.repositoryOwner} --token ${token} ${labelsArgument}`
-          : `--url https://github.com/${payload.repositoryOwner}/${payload.repositoryName} --token ${token} ${labelsArgument}`,
+          ? `--url ${githubServerUrl}${payload.repositoryOwner} --token ${token} ${labelsArgument}`
+          : `--url ${githubServerUrl}${payload.repositoryOwner}/${payload.repositoryName} --token ${token} ${labelsArgument}`,
         orgName: enableOrgLevel ? payload.repositoryOwner : undefined,
         repoName: enableOrgLevel ? undefined : `${payload.repositoryOwner}/${payload.repositoryName}`,
       });
