@@ -74,6 +74,7 @@ module "runners" {
   ami_filter          = local.ami_filter
   ami_owners          = var.ami_owners
 
+  github_server_url               = var.github_server_url
   sqs_build_queue                 = aws_sqs_queue.queued_builds
   github_app                      = var.github_app
   enable_organization_runners     = var.enable_organization_runners

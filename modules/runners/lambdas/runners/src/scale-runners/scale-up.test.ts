@@ -38,6 +38,7 @@ describe('scaleUp', () => {
     process.env.GITHUB_APP_CLIENT_SECRET = 'TEST_CLIENT_SECRET';
     process.env.RUNNERS_MAXIMUM_COUNT = '3';
     process.env.ENVIRONMENT = 'unit-test-environment';
+    process.env.GITHUB_SERVER_URL = 'https://github.com/'
 
     jest.clearAllMocks();
     mockOctokit.actions.listWorkflowRunsForRepo.mockImplementation(() => ({
